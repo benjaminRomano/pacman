@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+		Benjamin Romano, CS 535, Project #5
+	</title>
+</head>
+<script id="vertex-shader" type="x-shader/x-vertex">
+
+attribute vec4 vPosition;
+uniform mat4 uMVMatrix;
+uniform mat4 uPMatrix;
+
+attribute vec2 vTexCoord;
+varying vec2 fTexCoord;
+
+void main()
+{
+    gl_Position = uPMatrix * uMVMatrix * vPosition;
+    fTexCoord = vTexCoord;
+}
+
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+
+precision mediump float;
+
+varying vec4 fColor;
+varying vec2 fTexCoord;
+
+uniform sampler2D texture;
+
+void main()
+{
+    gl_FragColor = texture2D(texture, fTexCoord);
+}
+</script>
+
+<script type="text/javascript" src="./Common/webgl-utils.js"></script>
+<script type="text/javascript" src="./Common/initShaders.js"></script>
+<script type="text/javascript" src="../Common/MV.js"></script>
+<script type="text/javascript" src="proj7.js"></script>
+
+<body>
+<canvas id="gl-canvas" width="800"" height="800">
+Oops ... your browser doesn't support the HTML5 canvas element
+</canvas>
+</br>
+<label id="score">Score: 0</label>
+</br>
+<label> 
+    Change perspective using 1,2,3.
+    Reset game with ESC.
+    Move around with the arrow keys
+</label>
+<img id = "BRICK" src = "BRICK.jpg" hidden />
+<img id = "WOOD" src = "WOOD.jpg" hidden />
+<img id = "BLACK" src = "BLACK.jpg" hidden />
+<img id = "PACMAN" src = "PACMAN.gif" hidden />
+<img id = "PELLET" src = "PELLET.png" hidden />
+</body>
+</html>
